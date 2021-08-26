@@ -623,6 +623,11 @@ export const getFieldInfos = async (page: Page, currentState: Partial<FbPage>): 
         });
     });
 
+    // to find new image on about page
+    // console.log('img:' + await page.$eval('#pages_msite_body_contents', (data) => {
+    //    return Array.prototype.slice.call(data.querySelectorAll('img')).map(i => i.src);
+    // }));
+
     // match the results with the selectors name, to generate
     // the output object. existing non-empty entries won't be
     // overwritten.

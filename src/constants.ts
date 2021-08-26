@@ -1,7 +1,7 @@
 import type { FbLabel } from './definitions';
 
 export const MOBILE_HOST = 'm.facebook.com';
-export const MOBILE_ADDRESS = `https://m.facebook.com${MOBILE_HOST}`;
+export const MOBILE_ADDRESS = `{MOBILE_HOST}`;
 export const DESKTOP_HOST = 'www.facebook.com';
 export const DESKTOP_ADDRESS = `https://${DESKTOP_HOST}`;
 
@@ -24,7 +24,7 @@ export const CSS_SELECTORS = {
     PAGE_NAME: 'meta[property="og:title"]',
     VERIFIED: 'img[src*="y4dAXG_mKhh"]',
     VALID_PAGE: 'meta[property="og:url"]',
-    META_DESCRIPTION: 'meta[property="og:description"]',
+    META_DESCRIPTION: 'meta[name="description"]',
     MOBILE_BODY_CLASS: 'body.touch.x2.android',
     COMMENTS_CONTAINER: 'form[rel="async"] ul',
     MOBILE_LOADING_INDICATOR: '[data-sigil*="m-loading-indicator-animate"][style]',

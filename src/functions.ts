@@ -367,7 +367,7 @@ export const createSelectorFromImageSrc = (names: string[]) => {
 export const imageSelectors = {
     checkins: createSelectorFromImageSrc(['a0b87sO1_bq', '9Zt6zuj8e1D', '2lBnDDIRCyn']),
     website: createSelectorFromImageSrc(['TcXGKbk-rV1', 'xVA3lB-GVep', 'EaDvTjOwxIV', 'aE7VLFYMYdl', '_E0siE7VRxg', 'ZWx4MakmUd4', 'D9kpGIZvg_a']),
-    categories: createSelectorFromImageSrc(['Knsy-moHXi6', 'LwDWwC1d0Rx', '3OfQvJdYD_W', 'Esxx6rJcLfG', 'Ae8V14AHXF3', 'I5oOkD-Jgg9']),
+    categories: createSelectorFromImageSrc(['Knsy-moHXi6', 'LwDWwC1d0Rx', '3OfQvJdYD_W', 'Esxx6rJcLfG', 'Ae8V14AHXF3', 'I5oOkD-Jgg9', '6QbEglrVsx', 'IRzVOVKydTh']),
     email: createSelectorFromImageSrc(['C1eWXyukMez', 'vKDzW_MdhyP', 'vPTKpTJr2Py', '7wycyFqCurV', 'usNPpfkTtic']),
     info: createSelectorFromImageSrc(['u_owK2Sz5n6', 'fTt3W6Nw8z-', 'ufx6pe0BYZ9', 'nUK82gYKq3c', 'EXVJNaeBMtn']), // about / founded
     impressum: createSelectorFromImageSrc(['7Pg05R2u_QQ', 'xJ79lPp3fxx', 'W1Gz3-6Jba9']),
@@ -377,7 +377,7 @@ export const imageSelectors = {
     overview: createSelectorFromImageSrc(['uAsvCr33XaU', 'J7QgCgbppF8']),
     awards: createSelectorFromImageSrc(['rzXNHRgEfui', 'catvAig7x2x']),
     mission: createSelectorFromImageSrc(['z-wfU5xgk6Z', '3vccp1jK8fn']),
-    address: createSelectorFromImageSrc(['h2e1qHNjIzG', 'ya-WX5CZARc']),
+    address: createSelectorFromImageSrc(['h2e1qHNjIzG', 'ya-WX5CZARc', 'PwUkFLBBA85']),
     phone: createSelectorFromImageSrc(['6oGknb-0EsE', 'znYEAkatLCe', 'BaiUsFiMGWy', 'BkWgVZPGfa0']),
     priceRange: createSelectorFromImageSrc(['q-WY9vrfkFZ', 'cAfaJdw2ZpN', 'RoNYAkqnZi0']),
     products: createSelectorFromImageSrc(['bBMZ-3vnEih', '9gnPGIXZf0x', 'kqozvTg_ESH']),
@@ -620,6 +620,30 @@ export const setLanguageCodeToCookie = async (language: string, page: Page) => {
             name: 'locale',
             path: '/',
             value: language.replace('-', '_'),
+        },
+    ]);
+};
+
+/**
+ * Sets the cookie on the page to login
+ */
+export const setLoginToCookie = async (user: string, xs: string, page: Page) => {
+    await page.context().addCookies([
+        {
+            domain: '.facebook.com',
+            secure: true,
+            name: 'xs',
+            path: '/',
+            value: xs,
+        },
+    ]);
+    await page.context().addCookies([
+        {
+            domain: '.facebook.com',
+            secure: true,
+            name: 'c_user',
+            path: '/',
+            value: user,
         },
     ]);
 };

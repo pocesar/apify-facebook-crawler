@@ -256,6 +256,18 @@
             "editor": "checkbox",
             "default": false
         },
+        "user_id": {
+            "title": "User ID (c_user cookie)",
+            "description": "",
+            "type": "string",
+            "editor": "textfield"
+        },
+        "auth_xs": {
+            "title": "Auth XS (xs cookie)",
+            "description": "",
+            "type": "string",
+            "editor": "textfield"
+        },
         "searchPages": {
             "title": "Search pages",
             "description": "Search pages from the public directory",
@@ -382,6 +394,14 @@
             "description": "Get the Services if it exists",
             "default": true,
             "example": true,
+            "type": "boolean",
+            "editor": "checkbox"
+        },
+        "scrapeAbout": {
+            "title": "About",
+            "description": "Get the about page (require auth)",
+            "default": false,
+            "example": false,
             "type": "boolean",
             "editor": "checkbox"
         },

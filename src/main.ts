@@ -25,6 +25,7 @@ const { log } = Apify.utils;
 const {
     getUrlLabel,
     setLanguageCodeToCookie,
+    setLoginToCookie,
     normalizeOutputPageUrl,
     extractUsernameFromUrl,
     generateSubpagesFromUrl,
@@ -65,6 +66,8 @@ Apify.main(async () => {
         scrapePosts = true,
         scrapeServices = true,
         language = 'en-US',
+        user_id = null,
+        auth_xs = null,
         sessionStorage = '',
         useStealth = false,
         debugLog = false,
@@ -207,6 +210,7 @@ Apify.main(async () => {
         ...(scrapePosts ? ['posts'] : []),
         ...(scrapeReviews ? ['reviews'] : []),
         ...(scrapeServices ? ['services'] : []),
+        ...(scrapeAbout ? ['about'] : []),
     ] as FbSection[];
 
     const addPageSearch = createAddPageSearch(requestQueue);
@@ -387,6 +391,17 @@ Apify.main(async () => {
 
             await setLanguageCodeToCookie(language, page);
 
+            if (request.userData.label === LABELS.PAGE && request.userData.sub === 'about') {
+                if (!user_id || !auth_xs) {
+                    throw new InfoError(`You can add User ID and Auth XS params to login ...`, {
+                        url: request.url,
+                        namespace: 'login',
+                        userData,
+                    });
+                }
+                await setLoginToCookie(user_id, auth_xs, page);
+            }
+
             await executeOnDebug(async () => {
                 await page.exposeFunction('logMe', (...args: any[]) => {
                     console.log(...args); // eslint-disable-line no-console
@@ -516,7 +531,8 @@ Apify.main(async () => {
                     && label !== LABELS.SEARCH
                     && label !== LABELS.POST
                     && request.userData.sub !== 'posts'
-                    && await isNotFoundPage(page)) {
+                    && request.userData.sub !== 'about'
+                    && response.status() === 404) {
                     request.noRetry = true;
 
                     // throw away if page is not available
